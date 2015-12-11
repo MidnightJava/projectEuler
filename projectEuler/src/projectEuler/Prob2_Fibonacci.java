@@ -16,25 +16,20 @@ import com.codepoetics.protonpack.StreamUtils;
 public class Prob2_Fibonacci {
 	public static void main(String[] args) {
 		long sum = StreamUtils.takeWhile(Stream.iterate(1l, l -> fibonacci(l)), l -> l <= 4e6)
-		.mapToLong(l -> l) //unbox
-		.filter(l -> l % 2 == 0)
-		.sum();
-		
+				.mapToLong(l -> l) //unbox
+				.filter(l -> l % 2 == 0)
+				.sum();
+
 		System.err.println("sum: " + sum);
 	}
-	
-	private static long f1;
-	private static long f2;
+
+	private static long f1 = 1;
+	private static long f2 = 1;
 
 	private static long fibonacci(long i) {
-		if (i == 1) {
-			f1 = 1;
-			f2 = 1;
-		} else {
-			f1 = f2;
-			f2 = i;
-		}
+		f1 = f2;
+		f2 = i;
 		return f1 + f2;
 	}
-	
+
 }
