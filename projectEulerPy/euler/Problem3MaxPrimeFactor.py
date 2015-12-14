@@ -15,8 +15,7 @@ def factors(n):
     found = False
     for m in xrange(2, n/2):
         if n % m == 0:
-            for f in factors(n/m):
-                fList.append(f)
+            fList += factors(n/m)
             found = True
             break
     if not found:
@@ -51,7 +50,7 @@ def factors3(n):
 
 
 start = timeit.default_timer()
-print "#2 Max prime factor of 600851475143 is", max(factors(600851475143))
+print "#1 Max prime factor of 600851475143 is", max(factors(600851475143))
 stop = timeit.default_timer()
 print "Time:", stop - start
 
