@@ -10,7 +10,7 @@ def factors(n):
         for m in xrange(2, n/2, 2):
             if n % m == 0:
                 return False
-            return True
+        return True
     fList = []
     found = False
     for m in xrange(2, n/2):
@@ -39,16 +39,20 @@ def factors3(n):
         for m in xrange(2, n/2):
             if n % m == 0:
                 return n / m
-        return n
-    while True:
+        return -1
+    
+    a = f = maxFactor(n)
+    while f > 0:
+        a = n = f
         f = maxFactor(n)
-        if f != n:
-            n = f
-        else:
-            break
-    return f
+    return a
 
-
+def prime(n):
+    for m in xrange(2, n/2, 2):
+        if n % m == 0:
+            return False
+    return True
+    
 start = timeit.default_timer()
 print "#1 Max prime factor of 600851475143 is", max(factors(600851475143))
 stop = timeit.default_timer()
