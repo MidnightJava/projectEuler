@@ -59,11 +59,11 @@ def lcm2(n):
 #     return reduce(lambda x,y: x*y, map(lambda t: t[0]**t[1], factors.items()))
 
 start = timeit.default_timer()
-print "LCM of all numbers from 1 to 20 is ", lcm1(20)
+print "Brute force: LCM of all numbers from 1-20:", lcm1(20)
 stop = timeit.default_timer()
 print "Time:", stop - start
 
 start = timeit.default_timer()
-print "LCM of all numbers from 1 to 20 is ", lcm2(20)
+print "Math solution: LCM of all numbers from 1-20: ", lcm2(20)
 stop = timeit.default_timer()
 print "Time:", stop - start
