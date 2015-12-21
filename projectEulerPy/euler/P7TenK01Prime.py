@@ -4,7 +4,6 @@ Created on Dec 16, 2015
 @author: Mark
 '''
 from _collections import defaultdict
-from twisted.conch.openssh_compat import primes
 import timeit
 import math
 
@@ -28,40 +27,54 @@ def primeFactors(n):
             primes[n/prod] += 1 
         return primes
     
-start = timeit.default_timer()
-nPrimes = 0
-f = 2
-while nPrimes < 10001:
-    primes = primeFactors(f)
-    if len(primes) == 1 and primes[f] == 1:
-        nPrimes += 1
-        if nPrimes % 100 == 0:
-            print nPrimes, "th prime is", f
-    f += 1
-print "10001st prime:", f-1
-stop = timeit.default_timer()
-print "Time:", stop - start
+# start = timeit.default_timer()
+# nPrimes = 0
+# f = 2
+# while nPrimes < 10001:
+#     primes = primeFactors(f)
+#     if len(primes) == 1 and primes[f] == 1:
+#         nPrimes += 1
+#         if nPrimes % 100 == 0:
+#             print nPrimes, "th prime is", f
+#     f += 1
+# print "10001st prime:", f-1
+# stop = timeit.default_timer()
+# print "Time:", stop - start
 
-def primesInRange(m, n):
-    a = dict([(i,1) for i in xrange(m, n)])
-    p = m
-    for x in xrange(m, p):
-        a[x] = 0
+def primesInRange(m, n, primes):
+    print "get primes in range",m,n-1
+    a = dict([(i,1) for i in xrange(m, n) if i % 2 != 0 or i == 2])
+    if primes:
+        primesCopy = primes[::-1] #reverse list so pop will iterate from smallest to greatest
+        p = primesCopy.pop()
+        if p == 2: # skip 2, since remaining even numbers are not in the sieve
+            p = primesCopy.pop()
+        j =  m
+        while j % p != 0:
+            j += 2
+    else:
+        primesCopy = None
+        p = m
     while p**2 <= n:
         j = p**2
         while j <= n:        
             a[j] = 0
             j += p
-        p += 1
+        if primesCopy:
+            p = primesCopy.pop()
+        else:
+            p = 3 if p == 2 else p + 2
     return [n for n in a.keys() if a[n] == 1]
 
 def nthPrime(n):
     count = 0
     start = 2
-    sieve = 2 * n * int(math.log(n))
+    sieve = 100000
+#     sieve = 2 * n * int(math.log(n))
+    primes = []
     while count < n:
-        primes = primesInRange(start, start + sieve)
-        count += len(primes)
+        primes.extend(primesInRange(start, start + sieve, primes))
+        count = len(primes)
         start += sieve
 #         print count, "primes found so far"
     if count == n:

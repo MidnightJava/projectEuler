@@ -33,7 +33,6 @@ def factors2(n):
         m += 1
     return f
 
-#fastest
 def factors3(n):
     def maxFactor(n):
         for m in xrange(2, n/2):
@@ -46,12 +45,6 @@ def factors3(n):
         a = n = f
         f = maxFactor(n)
     return a
-
-def prime(n):
-    for m in xrange(2, n/2, 2):
-        if n % m == 0:
-            return False
-    return True
     
 start = timeit.default_timer()
 print "#1 Max prime factor of 600851475143 is", max(factors(600851475143))
@@ -67,4 +60,14 @@ start = timeit.default_timer()
 print "#3: Max prime factor of 600851475143 is", factors3(600851475143)
 stop = timeit.default_timer()
 print "Time:", stop - start
+
+
+#factors() and factors3() failed to complete when run with a much larger numbe,
+#but factors2() seems to work for all numbers
+
+#Time: 0.00138902664185
+#2: Max prime factor of 600851475143 is 6857
+#Time: 0.000735998153687
+#3: Max prime factor of 600851475143 is 6857
+#Time: 0.000617980957031
         

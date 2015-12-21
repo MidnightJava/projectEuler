@@ -13,7 +13,7 @@ import com.codepoetics.protonpack.StreamUtils;
  * By considering the terms in the Fibonacci sequence whose values do not exceed four million,
  * find the sum of the even-valued terms.*/
 
-public class Prob2_Fibonacci {
+public class Prob_2_Fibonacci {
 	public static void main(String[] args) {
 		long sum = StreamUtils.takeWhile(Stream.iterate(1l, l -> fibonacci(l)), l -> l <= 4e6)
 				.mapToLong(l -> l) //unbox
