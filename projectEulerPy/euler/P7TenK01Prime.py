@@ -49,9 +49,6 @@ def primesInRange(m, n, primes):
         p = primesCopy.pop()
         if p == 2: # skip 2, since remaining even numbers are not in the sieve
             p = primesCopy.pop()
-        j =  m
-        while j % p != 0:
-            j += 2
     else:
         primesCopy = None
         p = m
@@ -69,7 +66,7 @@ def primesInRange(m, n, primes):
 def nthPrime(n):
     count = 0
     start = 2
-    sieve = 100000
+    sieve = 10000
 #     sieve = 2 * n * int(math.log(n))
     primes = []
     while count < n:
