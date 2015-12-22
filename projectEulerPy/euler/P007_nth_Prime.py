@@ -5,27 +5,26 @@ Created on Dec 16, 2015
 '''
 from _collections import defaultdict
 import timeit
-import math
 
-def primeFactors(n):
-        primes = defaultdict(int)
-        for i in xrange(2, n):
-            if n % i == 0:
-                tempdict = defaultdict(int)
-                for num, count in primeFactors(i).items():
-                    tempdict[num] += count
-                for num, count in tempdict.items():
-                    if count > primes[num]:
-                        primes[num] = count
-                tempdict.clear()
-        if len(primes.keys()) == 0:
-            primes[n] += 1
-        prod = 1
-        for num, count in primes.items():
-            prod *= (num**count)
-        if n/prod != 1:
-            primes[n/prod] += 1 
-        return primes
+# def primeFactors(n):
+#         primes = defaultdict(int)
+#         for i in xrange(2, n):
+#             if n % i == 0:
+#                 tempdict = defaultdict(int)
+#                 for num, count in primeFactors(i).items():
+#                     tempdict[num] += count
+#                 for num, count in tempdict.items():
+#                     if count > primes[num]:
+#                         primes[num] = count
+#                 tempdict.clear()
+#         if len(primes.keys()) == 0:
+#             primes[n] += 1
+#         prod = 1
+#         for num, count in primes.items():
+#             prod *= (num**count)
+#         if n/prod != 1:
+#             primes[n/prod] += 1 
+#         return primes
 
 # Brute force, takes over half an hour
 # start = timeit.default_timer()
@@ -43,7 +42,6 @@ def primeFactors(n):
 # print "Time:", stop - start
 
 def primesInRange(m, n, primes):
-    print "get primes in range",m,n-1
     a = dict([(i,1) for i in xrange(m, n) if i % 2 != 0 or i == 2])
     if primes:
         primesCopy = primes[::-1] #reverse list so pop will iterate from smallest to greatest
@@ -82,7 +80,7 @@ def nthPrime(n):
         return primes[-(count - n + 1)]
 
 start = timeit.default_timer()
-print nthPrime(10001)
+print "10001th prime:", nthPrime(1000000)
 stop = timeit.default_timer()
 print "Time:", stop - start
 
