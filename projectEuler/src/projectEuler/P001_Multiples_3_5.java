@@ -8,7 +8,7 @@ import java.util.Date;
  * multiples of 3 or 5 below 1000.
  * */
 
-public class Prob_1_Multiples_3_5 {
+public class P001_Multiples_3_5 {
 
 	/**
 	 * It's faster to make two passes of every third and fifth number, rather
